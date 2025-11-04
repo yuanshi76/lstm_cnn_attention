@@ -1,7 +1,8 @@
-from keras.layers.core import *
-from keras.layers.recurrent import LSTM
-from keras.models import *
-from keras.layers import merge, TimeDistributed, Conv1D, Bidirectional
+from tensorflow.keras.layers import *
+from tensorflow.keras.layers import LSTM
+from tensorflow.keras.models import *
+from keras.layers import TimeDistributed, Conv1D, Bidirectional
+from tensorflow.keras.layers import Multiply
 def generate_lstm_model(n_input, n_out, n_features):
     model = Sequential()
     model.add(LSTM(64, activation='relu', input_shape=(n_input, n_features)))#添加LSTM层，设置输入格式
@@ -43,7 +44,7 @@ def attention_block(inputs, time_step):
     # batch_size, lstm_units, time_steps -> batch_size, time_steps, lstm_units
     a_probs = Permute((2, 1), name='attention_vec')(a)
     # 相当于获得每一个step中，每个特征的权重
-    output_attention_mul = merge([inputs, a_probs], name='attention_mul', mode='mul')
+    output_attention_mul = Multiply(name='attention_mul')([inputs, a_probs])
     return output_attention_mul
 
 

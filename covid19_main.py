@@ -1,8 +1,8 @@
 from pandas import read_csv
 from sklearn.preprocessing import MinMaxScaler
 import pandas as pd
-from DeepLeraning.model.model_fun import *
-from DeepLeraning.utils.load_data import series_to_supervised,split_data
+from model.model_fun import *
+from utils.load_data import series_to_supervised,split_data
 from keras.callbacks import EarlyStopping
 """
 本文是LSTM多元预测
